@@ -8,7 +8,7 @@ const projects = [
     title: "MernStack Export Website",
     description: "Developed a full-stack export business website using the MERN stack with responsive UI, product management, and customer inquiry features.",
     image: "/assets/mern-stack-export.png",
-    link: "#"
+    link: "https://auric-international.vercel.app"
   },
   {
     id: 2,
@@ -88,18 +88,21 @@ export default function Projects() {
               
               {/* Image Container with Glassmorphism Border */}
               <div className="lg:w-1/2 w-full p-2 lg:p-3 rounded-[2rem] bg-white/40 backdrop-blur-xl border border-white/60 shadow-[0_8px_30px_rgba(31,38,135,0.08)]">
-                <div className="w-full h-[250px] lg:h-[350px] rounded-[1.5rem] overflow-hidden bg-white/50 relative group">
+                <div className="w-full h-[250px] lg:h-[350px] rounded-[1.5rem] overflow-hidden bg-white/50 relative group flex items-center justify-center">
                   <img
-                    className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out"
+                    // Here 'object-cover' is changed to 'object-contain'
+                    className="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-700 ease-in-out p-2"
                     src={project.image}
                     alt={project.title}
                   />
-                  {/* Overlay on Hover */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                     <a href={project.link} target="_blank" rel="noopener noreferrer" className="bg-white/20 backdrop-blur-md p-3 rounded-full text-white hover:bg-white hover:text-black transition-colors shadow-lg">
-                        <TbExternalLink size={24} />
-                     </a>
-                  </div>
+                  {/* Overlay on Hover (Only for Project 1) */}
+                  {project.id === 1 && (
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center p-6 pb-10">
+                       <a href={project.link} target="_blank" rel="noopener noreferrer" className="bg-white/20 backdrop-blur-md p-3 rounded-full text-white hover:bg-white hover:text-black transition-colors shadow-lg">
+                          <TbExternalLink size={24} />
+                       </a>
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -117,14 +120,17 @@ export default function Projects() {
                   {project.description}
                 </p>
                 
-                <a 
-                  href={project.link} 
-                  className="inline-flex items-center gap-2 font-semibold text-blue-600 hover:text-purple-600 transition-colors duration-300" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                >
-                  View Project <TbExternalLink size={20} />
-                </a>
+                {/* View Project Link (Only for Project 1) */}
+                {project.id === 1 && (
+                  <a 
+                    href={project.link} 
+                    className="inline-flex items-center gap-2 font-semibold text-blue-600 hover:text-purple-600 transition-colors duration-300" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                  >
+                    View Project <TbExternalLink size={20} />
+                  </a>
+                )}
               </div>
               
             </motion.div>
