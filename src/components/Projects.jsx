@@ -75,47 +75,48 @@ export default function Projects() {
           My <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Projects</span>
         </motion.h2>
 
-        <div className="lg:mt-16 mt-8 lg:space-y-20 space-y-12">
+        <div className="lg:mt-16 mt-8 lg:space-y-24 space-y-16">
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
-              // Unified Single Card Container
-              className={`flex flex-col ${index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} items-center gap-8 lg:gap-12 bg-white/40 backdrop-blur-2xl border border-white/60 p-5 lg:p-8 rounded-[3rem] shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:shadow-[0_15px_40px_rgba(31,38,135,0.08)] hover:bg-white/50 transition-all duration-500`}
+              className={`flex justify-between items-center gap-10 flex-col ${index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"}`}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ type: "spring", stiffness: 70, damping: 15, delay: 0.1 }}
               viewport={{ once: true, margin: "-100px" }}
             >
               
-              {/* Image Section (Inside the Card) */}
-              <div className="w-full lg:w-1/2 h-[280px] lg:h-[400px] rounded-[2rem] bg-white/60 border border-white/80 relative group flex items-center justify-center overflow-hidden shadow-inner">
-                <img
-                  className="w-full h-full object-contain p-6 transform group-hover:scale-105 transition-transform duration-700 ease-in-out"
-                  src={project.image}
-                  alt={project.title}
-                />
-                
-                {/* Overlay on Hover (Only for Project 1) */}
-                {project.id === 1 && (
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center p-6 pb-8">
-                     <a href={project.link} target="_blank" rel="noopener noreferrer" className="bg-white/30 backdrop-blur-md p-4 rounded-full text-white hover:bg-white hover:text-blue-600 transition-all shadow-lg transform hover:scale-110">
-                        <TbExternalLink size={26} />
-                     </a>
-                  </div>
-                )}
+              {/* Image Container with Glassmorphism Border */}
+              <div className="lg:w-1/2 w-full p-2 lg:p-3 rounded-[2rem] bg-white/40 backdrop-blur-xl border border-white/60 shadow-[0_8px_30px_rgba(31,38,135,0.08)]">
+                <div className="w-full h-[250px] lg:h-[350px] rounded-[1.5rem] overflow-hidden bg-white/50 relative group flex items-center justify-center">
+                  <img
+                    // Here 'object-cover' is changed to 'object-contain'
+                    className="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-700 ease-in-out p-2"
+                    src={project.image}
+                    alt={project.title}
+                  />
+                  {/* Overlay on Hover (Only for Project 1) */}
+                  {project.id === 1 && (
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center p-6 pb-10">
+                       <a href={project.link} target="_blank" rel="noopener noreferrer" className="bg-white/20 backdrop-blur-md p-3 rounded-full text-white hover:bg-white hover:text-black transition-colors shadow-lg">
+                          <TbExternalLink size={24} />
+                       </a>
+                    </div>
+                  )}
+                </div>
               </div>
 
-              {/* Text Content Section (Inside the Card) */}
-              <div className="w-full lg:w-1/2 flex flex-col justify-center px-2 lg:px-6 py-4">
-                <h2 className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-300 to-gray-400 text-6xl lg:text-8xl opacity-40 mb-[-15px] lg:mb-[-20px] select-none">
+              {/* Text Content in Glass Card */}
+              <div className="lg:w-1/2 w-full bg-white/40 backdrop-blur-xl border border-white/60 p-8 lg:p-10 rounded-3xl shadow-[0_4px_25px_rgba(0,0,0,0.04)] hover:bg-white/60 transition-colors duration-500">
+                <h2 className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-300 to-gray-500 text-5xl lg:text-7xl opacity-50 mb-2">
                   {String(project.id).padStart(2, "0")}
                 </h2>
                 
-                <h3 className="font-bold text-gray-900 text-3xl lg:text-4xl mb-4 leading-tight relative z-10">
+                <p className="font-bold text-gray-900 text-2xl lg:text-4xl mb-4">
                   {project.title}
-                </h3>
+                </p>
 
-                <p className="font-medium text-base/7 lg:text-lg/8 text-gray-600 mb-8 relative z-10">
+                <p className="font-medium text-sm/7 lg:text-base/7 text-gray-600 mb-6">
                   {project.description}
                 </p>
                 
@@ -123,11 +124,11 @@ export default function Projects() {
                 {project.id === 1 && (
                   <a 
                     href={project.link} 
-                    className="inline-flex items-center gap-2 font-bold text-blue-600 hover:text-purple-600 transition-colors duration-300 w-fit" 
+                    className="inline-flex items-center gap-2 font-semibold text-blue-600 hover:text-purple-600 transition-colors duration-300" 
                     target="_blank" 
                     rel="noopener noreferrer"
                   >
-                    View Project <TbExternalLink size={22} />
+                    View Project <TbExternalLink size={20} />
                   </a>
                 )}
               </div>
